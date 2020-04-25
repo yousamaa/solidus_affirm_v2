@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ['Peter Berkenbosch']
   spec.email = 'info@peterberkenbosch.nl'
 
-  spec.summary = 'TODO: Write a short summary, because RubyGems requires one.'
-  spec.description = 'TODO: Write a longer description or delete this line.'
+  spec.summary = 'Solidus extension for using Affirm financing payments in your store'
+  spec.description = 'Solidus extenstion that integrates your store with Affirm financing payments using the new Transaction API '
   spec.homepage = 'https://github.com/solidusio/solidus_dev_support'
   spec.license = 'BSD-3-Clause'
 
