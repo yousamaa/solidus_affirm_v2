@@ -1,0 +1,5 @@
+<% if SolidusAffirmV2::PaymentMethod.first.present? %>
+  <% content_for :head do %>
+    <%= affirm_js_setup(SolidusAffirmV2::PaymentMethod.first.preferred_public_api_key, SolidusAffirmV2::PaymentMethod.first.preferred_javascript_url) %>
+  <% end %>
+<% end %>

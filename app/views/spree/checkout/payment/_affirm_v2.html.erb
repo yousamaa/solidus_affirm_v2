@@ -1,0 +1,9 @@
+<%= render partial: 'solidus_affirm_v2/affirm_js' %>
+<%= javascript_include_tag "spree/frontend/affirm_v2_checkout" %>
+
+<div
+  id="affirm_v2_checkout_payload"
+  class="hidden"
+  data-affirm='<%=affirm_payload_json(current_order, payment_method)%>'
+  data-paymentgateway='<%=SolidusAffirmV2::PaymentMethod.first.id%>'
+/>
