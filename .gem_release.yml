@@ -1,0 +1,5 @@
+bump:
+  recurse: false
+  file: 'lib/solidus_affirm_v2/version.rb'
+  message: Bump SolidusAffirmV2 to %{version}
+  tag: true
