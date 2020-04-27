@@ -38,7 +38,7 @@ module SolidusAffirmV2
     def try_void(payment)
       transaction_id = payment.response_code
       begin
-        transaction = ::Affirm::Client.new.read_transaction(transaction_id)
+        transaction = gateway.get_transaction(transaction_id)
       rescue Exception => e
         return ActiveMerchant::Billing::Response.new(false, e.message)
       end

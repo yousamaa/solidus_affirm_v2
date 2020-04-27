@@ -12,6 +12,10 @@ module SolidusAffirmV2
       end
     end
 
+    def get_transaction(transaction_id)
+      ::Affirm::Client.new.read_transaction(transaction_id)
+    end
+
     def authorize(_money, affirm_source, _options = {})
       begin
         response = ::Affirm::Client.new.authorize(affirm_source.transaction_id)
