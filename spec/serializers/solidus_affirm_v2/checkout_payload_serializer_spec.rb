@@ -7,7 +7,7 @@ RSpec.describe SolidusAffirmV2::CheckoutPayloadSerializer do
   let(:serializer) { SolidusAffirmV2::CheckoutPayloadSerializer.new(affirm_checkout_payload, root: false) }
   let(:line_item_attributes) do
     [
-      { product: create(:product, name: 'awesome product', sku: "P1") },
+      { product: create(:product, name: 'awesome product', sku: "P1", leasable: true) },
       { product: create(:product, name: 'amazing stuff', sku: "P2") }
     ]
   end
@@ -118,7 +118,8 @@ RSpec.describe SolidusAffirmV2::CheckoutPayloadSerializer do
           "unit_price" => 1000,
           "qty" => 1,
           "item_image_url" => nil,
-          "item_url" => "http://shop.localhost:3000/products/awesome-product"
+          "item_url" => "http://shop.localhost:3000/products/awesome-product",
+          "leasable" => true
         },
         {
           "display_name" => "amazing stuff",
@@ -126,7 +127,8 @@ RSpec.describe SolidusAffirmV2::CheckoutPayloadSerializer do
           "unit_price" => 1000,
           "qty" => 1,
           "item_image_url" => nil,
-          "item_url" => "http://shop.localhost:3000/products/amazing-stuff"
+          "item_url" => "http://shop.localhost:3000/products/amazing-stuff",
+          "leasable" => false
         }
       ]
     end

@@ -1,0 +1,11 @@
+<!-- insert_after '[data-hook=admin_product_form_promotionable]' -->
+
+<div data-hook="admin_product_form_leaseable">
+  <%= f.field_container :leasable do %>
+    <label>
+      <%= f.check_box :leasable %>
+      <%= Spree::Product.human_attribute_name(:leasable) %>
+    </label>
+    <%= f.field_hint :leasable %>
+  <% end %>
+</div>
