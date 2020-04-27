@@ -16,7 +16,8 @@ module SolidusAffirmV2
     def affirm_payload_json(order, payment_method, metadata = {})
       config = {
         confirmation_url: spree.affirm_v2_confirm_url(payment_method_id: payment_method.id, order_id: order.id),
-        cancel_url: spree.affirm_v2_cancel_url(payment_method_id: payment_method.id, order_id: order.id)
+        cancel_url: spree.affirm_v2_cancel_url(payment_method_id: payment_method.id, order_id: order.id),
+        exchange_lease_enabled: SolidusAffirmV2::Config.exchange_lease_enabled
       }
       payload = SolidusAffirmV2::CheckoutPayload.new(order, config, metadata)
       SolidusAffirmV2::Config.checkout_payload_serializer.new(payload, root: false).to_json

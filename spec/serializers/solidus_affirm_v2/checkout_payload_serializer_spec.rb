@@ -24,7 +24,8 @@ RSpec.describe SolidusAffirmV2::CheckoutPayloadSerializer do
   let(:config) do
     {
       confirmation_url: "https://merchantsite.com/confirm",
-      cancel_url: "https://merchantsite.com/cancel"
+      cancel_url: "https://merchantsite.com/cancel",
+      exchange_lease_enabled: SolidusAffirmV2::Config.exchange_lease_enabled
     }
   end
   let(:metadata) { {} }
@@ -34,7 +35,8 @@ RSpec.describe SolidusAffirmV2::CheckoutPayloadSerializer do
   it "wil have a 'merchant' object" do
     merchant_json = {
       "user_confirmation_url" => "https://merchantsite.com/confirm",
-      "user_cancel_url" => "https://merchantsite.com/cancel"
+      "user_cancel_url" => "https://merchantsite.com/cancel",
+      "exchange_lease_enabled" => false
     }
     expect(subject['merchant']).to eql merchant_json
   end
