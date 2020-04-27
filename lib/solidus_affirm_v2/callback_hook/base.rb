@@ -11,6 +11,9 @@ module SolidusAffirmV2
         payment.order.next! if payment.order.payment?
       end
 
+      def remove_tax!(order)
+      end
+
       def after_authorize_url(order)
         order_state_checkout_path(order)
       end

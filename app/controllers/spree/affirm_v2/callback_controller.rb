@@ -30,6 +30,7 @@ module Spree
             })
             hook = SolidusAffirmV2::Config.callback_hook.new
             hook.authorize!(payment)
+            hook.remove_tax!(order) if provider == "katapult"
             redirect_to hook.after_authorize_url(order)
           end
         end
