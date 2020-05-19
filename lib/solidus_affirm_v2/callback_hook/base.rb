@@ -7,10 +7,13 @@ module SolidusAffirmV2
         payment.process!
         authorized_affirm = Affirm::Client.new.read_transaction(payment.response_code)
 
+        # TODO: have a better solution for this.
+        provider = SolidusAffirmV2::Transaction::PROVIDERS[authorized_affirm.provider_id-1]
+
         payment.source.update_attributes(
           {
             transaction_id: authorized_affirm.id,
-            provider: authorized_affirm.provider
+            provider: provider
           }
         )
 
