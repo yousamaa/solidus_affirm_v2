@@ -5,6 +5,8 @@ Port and minor upgrade from [solidus_affirm](https://github.com/solidusio/solidu
 
 This extension uses the [Direct Connect API](https://docs.affirm.com/affirm-developers/docs/direct-connect-api) to integrate with Affirm.
 
+**This work is sponsored by the [Solidus Open Collective fund](https://opencollective.com/solidus)**
+
 ## Installation
 
 Add solidus_affirm_v2 to your Gemfile:
