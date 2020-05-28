@@ -5,19 +5,16 @@ module SolidusAffirmV2
     class Base
       def authorize!(payment)
         payment.process!
-        authorized_affirm = Affirm::Client.new.read_transaction(payment.response_code)
+        authorized_affirm = Affirm::Client.new.read_transaction(payment.transaction_id)
 
-        # TODO: have a better solution for this.
-        provider = SolidusAffirmV2::Transaction::PROVIDERS[authorized_affirm.provider_id-1]
-
-        payment.source.update_attributes(
+        payment.source.update(
           {
             transaction_id: authorized_affirm.id,
-            provider: provider
+            provider: authorized_affirm.provider
           }
         )
 
-        remove_tax!(payment.order) if provider == :katapult
+        remove_tax!(payment.order) if authorized_affirm.provider == :katapult
 
         payment.amount = authorized_affirm.amount / 100.0
         payment.save!

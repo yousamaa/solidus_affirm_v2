@@ -3,7 +3,5 @@
 module SolidusAffirmV2
   class Transaction < Spree::PaymentSource
     self.table_name = "solidus_affirm_v2_transactions"
-
-    PROVIDERS = [:affirm, :katapult]
   end
 end
