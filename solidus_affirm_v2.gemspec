@@ -10,12 +10,12 @@ Gem::Specification.new do |spec|
 
   spec.summary = 'Solidus extension for using Affirm financing payments in your store'
   spec.description = 'Solidus extenstion that integrates your store with Affirm financing payments using the new Transaction API '
-  spec.homepage = 'https://github.com/solidusio/solidus_dev_support'
+  spec.homepage = 'https://github.com/solidusio-contrib/solidus_affirm_v2'
   spec.license = 'BSD-3-Clause'
 
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = 'https://github.com/solidusio/solidus_dev_support'
-  spec.metadata['changelog_uri'] = 'https://github.com/solidusio/solidus_dev_support/releases'
+  spec.metadata['source_code_uri'] = 'https://github.com/solidusio-contrib/solidus_affirm_v2'
+  spec.metadata['changelog_uri'] = 'https://github.com/solidusio-contrib/solidus_affirm_v2/releases'
 
   spec.required_ruby_version = Gem::Requirement.new('~> 2.4')
 

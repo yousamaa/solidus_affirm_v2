@@ -18,7 +18,7 @@ gem 'solidus_affirm_v2'
 or use it directly from Github like this:
 
 ```ruby
-gem 'solidus_affirm_v2', github: 'peterberkenbosch/solidus_affirm_v2'
+gem 'solidus_affirm_v2', github: 'solidusio-contrib/solidus_affirm_v2'
 ```
 
 Bundle your dependencies and run the installation generator:
