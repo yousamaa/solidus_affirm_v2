@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'affirm'
 
 RSpec.describe Spree::AffirmV2::CallbackController do
   let(:order) { create(:order_with_totals) }
@@ -47,17 +48,47 @@ RSpec.describe Spree::AffirmV2::CallbackController do
 
     context 'with valid data' do
       let(:order) { create(:order_with_totals, state: "payment") }
-      let(:payment_method) do
-        create(
-          :affirm_payment_gateway,
-          preferred_public_api_key: "XPSQ3CA7PLN7CJCK",
-          preferred_private_api_key: "w9mxkQUryKjTYDqOfSvYTeTGoLIURKpU",
-          preferred_test_mode: true
-        )
-      end
-      let(:checkout_token) { "26VJRAAYE0MB0V25" }
+      let(:affirm_payment_source) { create(:affirm_v2_transaction) }
+      let(:checkout_token) { "TKLKJ71GOP9YSASU" }
+      let(:transaction_id) { "N330-Z6D4" }
 
-      xit "redirect to the confirm page" do
+      let!(:affirm_transaction_response) { Affirm::Struct::Transaction.new({ id: transaction_id, provider_id: 1, amount: 42499, status: "authorized" }) }
+
+      before do
+        allow_any_instance_of(Affirm::Client).to receive(:authorize).with(checkout_token).and_return(affirm_transaction_response)
+        allow_any_instance_of(Affirm::Client).to receive(:read_transaction).with(transaction_id).and_return(affirm_transaction_response)
+      end
+
+      it "creates a payment" do
+        expect {
+          post '/affirm_v2/confirm', params: {
+            checkout_token: checkout_token,
+            payment_method_id: payment_method.id,
+            order_id: order.id,
+            use_route: :spree
+          }
+        }.to change{ order.payments.count }.from(0).to(1)
+      end
+
+      it "creates a SolidusAffirmV2::Transaction" do
+        expect {
+          post '/affirm_v2/confirm', params: {
+            checkout_token: checkout_token,
+            payment_method_id: payment_method.id,
+            order_id: order.id,
+            use_route: :spree
+          }
+        }.to change{ SolidusAffirmV2::Transaction.count }.by(1)
+      end
+
+      it "redirect to the confirm page" do
+        post '/affirm_v2/confirm', params: {
+          checkout_token: checkout_token,
+          payment_method_id: payment_method.id,
+          order_id: order.id,
+          use_route: :spree
+        }
+        expect(response).to redirect_to('/checkout/confirm')
       end
     end
   end

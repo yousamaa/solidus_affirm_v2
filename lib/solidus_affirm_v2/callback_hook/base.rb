@@ -5,13 +5,20 @@ module SolidusAffirmV2
     class Base
       def authorize!(payment)
         payment.process!
-        authorized_affirm = Affirm::Client.new.read_transaction(payment.response_code)
+        authorized_affirm = Affirm::Client.new.read_transaction(payment.transaction_id)
+
+        payment.source.update(
+          {
+            transaction_id: authorized_affirm.id,
+            provider: authorized_affirm.provider
+          }
+        )
+
+        remove_tax!(payment.order) if authorized_affirm.provider == :katapult
+
         payment.amount = authorized_affirm.amount / 100.0
         payment.save!
         payment.order.next! if payment.order.payment?
-      end
-
-      def remove_tax!(order)
       end
 
       def after_authorize_url(order)
@@ -20,6 +27,11 @@ module SolidusAffirmV2
 
       def after_cancel_url(order)
         order_state_checkout_path(order)
+      end
+
+      protected
+
+      def remove_tax!(order)
       end
 
       private
