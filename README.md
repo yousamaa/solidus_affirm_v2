@@ -5,7 +5,7 @@ Port and minor upgrade from [solidus_affirm](https://github.com/solidusio/solidu
 
 This extension uses the [Direct Connect API](https://docs.affirm.com/affirm-developers/docs/direct-connect-api) to integrate with Affirm.
 
-**This work is sponsored by the [Solidus Open Collective fund](https://opencollective.com/solidus)**
+**The work done before October 1st 2020 is sponsored by the [Solidus Open Collective fund](https://opencollective.com/solidus)**
 
 [![CircleCI](https://circleci.com/gh/solidusio-contrib/solidus_affirm_v2.svg?style=shield)](https://circleci.com/gh/solidusio-contrib/solidus_affirm_v2)
 
