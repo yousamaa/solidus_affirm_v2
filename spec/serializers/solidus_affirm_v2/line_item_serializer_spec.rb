@@ -33,7 +33,7 @@ RSpec.describe SolidusAffirmV2::LineItemSerializer do
       end
 
       it "will return the variant image url" do
-        expect(serialized_line_item_json["item_image_url"]).to match %r{/spree/products/\d/large/thinking-cat.jpg\?\d*}
+        expect(serialized_line_item_json["item_image_url"]).to match %r{/spree/products/\d/large/blank.jpg\?\d*}
       end
     end
 
@@ -44,7 +44,7 @@ RSpec.describe SolidusAffirmV2::LineItemSerializer do
       end
 
       it "will return the master product image url" do
-        expect(serialized_line_item_json["item_image_url"]).to match %r{/spree/products/\d/large/thinking-cat.jpg\?\d*}
+        expect(serialized_line_item_json["item_image_url"]).to match %r{/spree/products/\d/large/blank.jpg\?\d*}
       end
     end
   end
